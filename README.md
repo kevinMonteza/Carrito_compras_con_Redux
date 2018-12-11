@@ -1,0 +1,1 @@
+Aplicacion de carrito de compras con Redux y React js
