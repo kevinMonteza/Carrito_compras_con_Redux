@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+
+import store from '../store/index';
+import { removeToCart } from './../actions';
+
 import { Panel, Table, Button, Glyphicon } from 'react-bootstrap';
 
-import store from '../store';
+
 
 const styles = {
   footer: {
@@ -29,10 +33,7 @@ class ShoppingCart extends Component {
     console.log(nextProps);
   }
   removeFromCart( product ) {
-    store.dispatch({
-      type: "REMOVE_FROM_CART",
-      product
-    })
+    store.dispatch(removeToCart(product))
   }
 
   render() {
