@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import store from './../store';
 import { addProduct } from './../actions';
 
 import { Button, Glyphicon } from 'react-bootstrap';
@@ -22,8 +22,6 @@ const styles = {
 class ProductList extends Component {
   constructor() {
     super();
-    this.addToCart = this.addToCart.bind(this);
-
     this.state = {
       products: [
         { id: 1, name: "Hipster Ultimate", price: 299, image: "https://s3.amazonaws.com/makeitreal/projects/e-commerce/camiseta-1.jpg" },
@@ -31,10 +29,6 @@ class ProductList extends Component {
         { id: 3, name: "Underground Max", price: 149, image: "https://s3.amazonaws.com/makeitreal/projects/e-commerce/camiseta-3.jpg" },
       ]
     }
-  }
-  addToCart( product ) {
-    console.log(addProduct(product));
-    store.dispatch( addProduct( product ) );
   }
 
   render() {
@@ -46,7 +40,7 @@ class ProductList extends Component {
             <div className="caption">
               <h4>{product.name}</h4>
               <p>
-                <Button bsStyle="primary" onClick={() => this.addToCart(product)} role="button" disabled={product.inventory <= 0}>${product.price} <Glyphicon glyph="shopping-cart" /></Button>
+                <Button bsStyle="primary" onClick={() => this.props.addToCart(product)} role="button" disabled={product.inventory <= 0}>${product.price} <Glyphicon glyph="shopping-cart" /></Button>
               </p>
             </div>
           </div>
@@ -57,4 +51,11 @@ class ProductList extends Component {
 
 }
 
-export default ProductList;
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart(product) {
+      dispatch(addProduct(product));
+    }
+  }
+}
+export default connect(null, mapDispatchToProps)(ProductList);

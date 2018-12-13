@@ -1,3 +1,4 @@
+
 const addProduct = product => {
        return {
             type: "ADD_TO_CART",
@@ -5,11 +6,11 @@ const addProduct = product => {
        };    
 };
 
-const removeToCart = product => {
+const removeFromCart = product => {
     return {
         type: "REMOVE_FROM_CART",
         product
       }
 }
 
-export {addProduct, removeToCart};
+export {addProduct, removeFromCart};

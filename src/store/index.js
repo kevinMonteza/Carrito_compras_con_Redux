@@ -9,7 +9,6 @@ const reducer = (state, action) => {
         }
     }
     else if(action.type === "REMOVE_FROM_CART"){
-            console.log(...state.cart);
             return{
                 ...state,
                 cart: state.cart.filter( product => product.id !== action.product.id)
