@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import { addProduct } from './../actions';
@@ -19,36 +19,30 @@ const styles = {
   }
 };
 
-class ProductList extends Component {
-  constructor() {
-    super();
-    this.state = {
-      products: [
-        { id: 1, name: "Hipster Ultimate", price: 299, image: "https://s3.amazonaws.com/makeitreal/projects/e-commerce/camiseta-1.jpg" },
-        { id: 2, name: "On Motion Live", price: 99, image: "https://s3.amazonaws.com/makeitreal/projects/e-commerce/camiseta-2.jpg" },
-        { id: 3, name: "Underground Max", price: 149, image: "https://s3.amazonaws.com/makeitreal/projects/e-commerce/camiseta-3.jpg" },
-      ]
-    }
-  }
-
-  render() {
+const ProductList =(props) => {
+    //console.table(this.state.products);
+   // console.log(JSON.stringify(this.state.products,null,1))
     return (
       <div style={styles.products}>
-        {this.state.products.map(product =>
+        {props.products && props.products.map(product =>
           <div className="thumbnail" style={styles.product} key={product.id}>
             <img src={product.image} alt={product.name} />
             <div className="caption">
               <h4>{product.name}</h4>
               <p>
-                <Button bsStyle="primary" onClick={() => this.props.addToCart(product)} role="button" disabled={product.inventory <= 0}>${product.price} <Glyphicon glyph="shopping-cart" /></Button>
+                <Button bsStyle="primary" onClick={() => props.addToCart(product)} role="button" disabled={product.inventory <= 0}>${product.price} <Glyphicon glyph="shopping-cart" /></Button>
               </p>
             </div>
           </div>
         )}
       </div>
     );
-  }
+}
 
+const mapStateToProps = state => {
+  return { 
+    products: state.products
+  };
 }
 
 const mapDispatchToProps = dispatch => {
@@ -58,4 +52,4 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-export default connect(null, mapDispatchToProps)(ProductList);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

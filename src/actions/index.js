@@ -1,3 +1,15 @@
+import conexion from '../servicios/index';
+
+const loadProducts = () => { 
+    return async dispatch => {
+         let products;
+         products = await conexion();
+         console.log(products);
+        dispatch({ 
+             type: "LIST_PRODUCTS", 
+             products }) 
+        } 
+    };
 
 const addProduct = product => {
        return {
@@ -13,4 +25,4 @@ const removeFromCart = product => {
       }
 }
 
-export {addProduct, removeFromCart};
+export {addProduct, removeFromCart, loadProducts};

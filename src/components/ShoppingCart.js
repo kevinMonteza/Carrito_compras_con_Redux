@@ -53,3 +53,10 @@ const mapDispatchToProps = dispatch => {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingCart);
+
+/**
+ * const loadProducts = () => { return async dispatch => { let res = await fetch('http://localhost:3001/products')
+ *  let products = await res.json(); 
+ * return dispatch({ type: "REPLACE_PRODUCTS", products }) } };
+ * faker and json-server
+ */
